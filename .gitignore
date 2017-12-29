@@ -24,6 +24,7 @@ hs_err_pid*
 # IDEA
 .DS_Store
 .idea
+build/
 cert/
 gradle/
 out/
