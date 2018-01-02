@@ -26,7 +26,6 @@ public class Result extends Object {
         return responseCode;
     }
 
-
     public String getReason() {
         return reason;
     }
