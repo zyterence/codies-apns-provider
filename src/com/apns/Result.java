@@ -2,9 +2,22 @@ package com.apns;
 
 public class Result extends Object {
 
+    public enum Reason {
+        BadDeviceToken {
+            public String toString() {
+                return "BadDeviceToken";
+            }
+        },
+        Other {
+            public String toString() {
+                return "Other";
+            }
+        }
+    }
+
     private String deviceToken;
     private int responseCode;
-    private String reason;
+    private Reason reason;
 
     public void setDeviceToken(String deviceToken) {
         this.deviceToken = deviceToken;
@@ -14,7 +27,7 @@ public class Result extends Object {
         this.responseCode = responseCode;
     }
 
-    public void setReason(String reason) {
+    public void setReason(Reason reason) {
         this.reason = reason;
     }
 
@@ -26,7 +39,7 @@ public class Result extends Object {
         return responseCode;
     }
 
-    public String getReason() {
+    public Reason getReason() {
         return reason;
     }
 }

@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import okhttp3.*;
 import okio.BufferedSink;
 import static com.apns.Pusher.Mode;
+import static com.apns.Result.Reason;
 
 public class Client {
 
@@ -102,7 +103,15 @@ public class Client {
         Result result = new Result();
         result.setResponseCode(response.code());
         if (response.code() != 200 && response.body() != null) {
-            result.setReason(JSON.parseObject(response.body().string(), ApnsData.class).getReason());
+            final String reason = JSON.parseObject(response.body().string(), ApnsData.class).getReason();
+            switch (Reason.valueOf(reason)) {
+                case BadDeviceToken:
+                    result.setReason(Reason.BadDeviceToken);
+                    break;
+                default:
+                    result.setReason(Reason.Other);
+                    break;
+            }
         }
         return result;
     }
