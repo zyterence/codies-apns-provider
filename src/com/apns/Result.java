@@ -4,11 +4,13 @@ public class Result extends Object {
 
     public enum Reason {
         BadDeviceToken {
+            @Override
             public String toString() {
                 return "BadDeviceToken";
             }
         },
         Other {
+            @Override
             public String toString() {
                 return "Other";
             }

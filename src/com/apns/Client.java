@@ -104,14 +104,12 @@ public class Client {
         result.setResponseCode(response.code());
         if (response.code() != 200 && response.body() != null) {
             final String reason = JSON.parseObject(response.body().string(), ApnsData.class).getReason();
-            switch (Reason.valueOf(reason)) {
-                case BadDeviceToken:
-                    result.setReason(Reason.BadDeviceToken);
-                    break;
-                default:
-                    result.setReason(Reason.Other);
-                    break;
+            if (Reason.BadDeviceToken.toString().equals(reason)) {
+                result.setReason(Reason.BadDeviceToken);
+            } else {
+                result.setReason(Reason.Other);
             }
+            System.out.println(result.getReason().toString());
         }
         return result;
     }
